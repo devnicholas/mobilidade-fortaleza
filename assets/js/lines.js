@@ -17,6 +17,7 @@ const lines = {
 				loading.hide();
 			},
 			error: function (err) {
+				alert('Ocorreu um erro ao consultar as linhas. Tente novamente mais tarde.')
 				console.log(err);
 				loading.hide();
 			},
@@ -44,11 +45,12 @@ const lines = {
 				data.forEach((route) => {
 					html += `<div class="route">
 								<div class="header-box-result">
-									<h3>Ponto de partida: ${route.postoControle}</h3>
+									<h3>Saindo de: ${route.postoControle}</h3>
 								</div>`;
 					html += `<div class="hours-container">`;
 					route.horarios.forEach((hour) => {
-						html += `<div class="hour-item">${hour.horario}</div>`;
+						const disabled = checkPassedTime(hour.horario) ? 'disabled' : ''
+						html += `<div class="hour-item ${disabled}">${hour.horario}</div>`;
 					});
 					html += `</div>
 					</div>`;
@@ -57,6 +59,7 @@ const lines = {
 				loading.hide();
 			},
 			error: function (err) {
+				alert('Ocorreu um erro ao consultar a linha, por favor tente mais tarde.')
 				console.log(err);
 				loading.hide();
 			},

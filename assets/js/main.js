@@ -9,9 +9,13 @@ $(document).ready(function () {
     })
 });
 
-
 Date.prototype.toDateInputValue = (function() {
     var local = new Date(this);
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
     return local.toJSON().slice(0,10);
 });
+function checkPassedTime(hor) {
+    const now = new Date().getTime()
+    const time = new Date().setHours(hor.split(':')[0], hor.split(':')[1])
+    return time < now
+}
